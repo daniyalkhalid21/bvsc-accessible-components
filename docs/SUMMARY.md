@@ -8,4 +8,4 @@
 
 **Decisions.** Native `<dialog>` for the modal; automatic activation for tabs; safe default focus on "Back to basket" in the order confirmation; two always-mounted live regions for toasts, with errors that persist; 44px targets; errors as text plus icon; a 3px focus ring with at least 3:1 contrast.
 
-**Honest limits.** The audit scans each story in isolation at one viewport, and axe finds only part of the possible WCAG issues. Screen reader testing is recorded separately in the manual checklist. Final numbers: 8 components, 30 stories, 135 passing tests, 0 serious/critical axe violations, 0 failing contrast pairs.
+**Honest limits.** The audit scans each story in isolation at one viewport, and axe finds only part of the possible WCAG issues. **No NVDA or VoiceOver testing was performed**, so screen reader behaviour is verified only through ARIA patterns, automated axe checks and tests of the accessibility tree; a manual screen reader pass is the main remaining gap. Final numbers: 8 components, 30 stories, 135 passing tests, 0 serious/critical axe violations, 0 failing contrast pairs.

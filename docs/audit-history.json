@@ -21,5 +21,16 @@
   "status": "scoped out",
   "fix": "Rules disabled for Components/* stories in the audit script and Storybook a11y addon; still enforced on the Demo page",
   "element": "-"
+ },
+ {
+  "date": "2026-10-04",
+  "component": "Demo catalogue page",
+  "story": "Catalogue",
+  "rule": "region",
+  "impact": "moderate",
+  "description": "All page content should be contained by landmarks",
+  "element": "<a class=\"skip-link\" href=\"#main\">Skip to main content</a>",
+  "status": "fixed",
+  "fix": "Moved the SkipLink inside the page header (banner landmark); it is still the first tab stop"
  }
 ]

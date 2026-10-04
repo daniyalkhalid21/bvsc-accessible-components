@@ -22,3 +22,4 @@
 - First real-browser audit (Playwright/Chromium, 30 stories): 0 serious/critical, 66 moderate. All three rules are page-level (landmark-one-main, page-has-heading-one, region) and not applicable to isolated component stories: scoped off for Components/*, kept on for the Demo page (1 'region' finding there is still open until the offending element is identified; the audit log now records the element for each finding).
 - Real-browser audit after scoping: 0 serious/critical, 1 moderate (region) on the Demo page, element = the skip link outside any landmark. Fix: SkipLink moved inside <header>. To be confirmed by re-running npm run audit.
 - Skip link moved into header; re-run of real-browser audit: 30 stories, 0 serious/critical, 0 of any impact. README, SUMMARY and WCAG_CONFORMANCE updated to match.
+- Decision: NVDA/VoiceOver testing not performed. README, SUMMARY, WCAG_CONFORMANCE and the checklist now state this plainly as a known gap.

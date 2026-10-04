@@ -1,6 +1,6 @@
 # WCAG 2.2 conformance map
 
-An honest map of what each criterion relies on and how far it has been verified. **No claim of full AA conformance is made**: manual and screen reader testing is still to be recorded in `MANUAL_TEST_CHECKLIST.md`.
+An honest map of what each criterion relies on and how far it has been verified. **No claim of full AA conformance is made**: no manual screen reader testing was performed (the NVDA/VoiceOver tables in `MANUAL_TEST_CHECKLIST.md` are blank).
 
 Evidence key: **Unit** = Vitest/user-event assertion, **Axe-jsdom** = axe on every story in jsdom, **Axe-browser** = Playwright scan in CI (see `AUDIT_LOG.md`), **Token** = `contrast-check.mjs`, **Manual** = to be recorded by a person.
 

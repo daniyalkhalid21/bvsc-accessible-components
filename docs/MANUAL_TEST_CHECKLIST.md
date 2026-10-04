@@ -1,5 +1,7 @@
 # Manual test checklist
 
+**Status: the NVDA and VoiceOver tables below have NOT been completed. No screen reader testing has been done for this project.** The keyboard-only tables can be completed from the keyboard recording.
+
 Fill in the **Result** (Pass / Fail / Partial), **Issues** and **Fix** columns yourself while testing. Nothing here has been tested by a screen reader: no results are pre-filled.
 
 **Setup:** run `npm run storybook` (or open the deployed Storybook). Suggested pairings: NVDA + Firefox or Chrome on Windows; VoiceOver + Safari on macOS or iOS. Record the versions you used.
