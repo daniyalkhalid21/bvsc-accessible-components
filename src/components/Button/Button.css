@@ -1,0 +1,13 @@
+.bv-btn { display: inline-flex; align-items: center; justify-content: center; gap: var(--s-2); min-height: var(--target-min); min-width: var(--target-min); padding: var(--s-2) var(--s-5); border: 2px solid transparent; border-radius: 999px; font: inherit; font-weight: 700; letter-spacing: .01em; cursor: pointer; transition: background-color var(--motion), transform var(--motion), box-shadow var(--motion); }
+.bv-btn:active:not(:disabled) { transform: translateY(1px); }
+.bv-btn--primary { background: var(--c-primary); color: var(--c-on-primary); box-shadow: 0 3px 0 var(--c-primary-hover); }
+.bv-btn--primary:hover { background: var(--c-primary-hover); }
+.bv-btn--secondary { background: var(--c-surface); color: var(--c-secondary-text); border-color: var(--c-primary); }
+.bv-btn--secondary:hover { background: var(--c-sand); }
+.bv-btn--danger { background: var(--c-danger); color: var(--c-on-danger); box-shadow: 0 3px 0 var(--c-danger-hover); }
+.bv-btn--danger:hover { background: var(--c-danger-hover); }
+.bv-btn--icon { padding: var(--s-2); }
+.bv-btn:disabled { background: var(--c-disabled-bg); color: var(--c-disabled-text); border-color: var(--c-disabled-bg); box-shadow: none; cursor: not-allowed; }
+.bv-btn[aria-busy="true"] { cursor: progress; opacity: 0.9; }
+.bv-btn__spinner { width: 1em; height: 1em; border: 2px solid currentColor; border-right-color: transparent; border-radius: 50%; animation: bv-spin 800ms linear infinite; }
+@keyframes bv-spin { to { transform: rotate(360deg); } }

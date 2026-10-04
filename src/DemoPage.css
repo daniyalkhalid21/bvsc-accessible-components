@@ -1,0 +1,29 @@
+.demo-header { display: flex; flex-wrap: wrap; gap: var(--s-4); align-items: center; justify-content: space-between; padding: var(--s-4) var(--s-6); background: var(--c-deep); color: var(--c-on-deep); }
+.demo-brand { margin: 0; font-family: var(--font-display); font-size: var(--fs-lg); font-weight: 700; letter-spacing: .01em; }
+.demo-header .bv-menu__btn:focus-visible, .demo-header .bv-btn:focus-visible, .skip-link:focus-visible { outline-color: var(--c-on-deep); }
+.demo-main:focus { outline: none; }
+.demo-hero { background: var(--c-deep); color: var(--c-on-deep); padding: var(--s-6) var(--s-6) 0; }
+.demo-wrap { max-width: 68rem; margin: 0 auto; }
+.demo-hero h1 { margin: 0 0 var(--s-3); font-size: clamp(2rem, 5vw, 3.25rem); max-width: 18ch; font-weight: 700; }
+.demo-hero p { margin: 0 0 var(--s-6); max-width: 46ch; font-size: var(--fs-lg); color: var(--c-on-deep-muted); }
+/* Graduation marks like a syringe barrel: decorative */
+.demo-ruler { height: 28px; margin-inline: calc(var(--s-6) * -1); background:
+  repeating-linear-gradient(90deg, var(--c-accent) 0 3px, transparent 3px 72px) top / 100% 100% no-repeat,
+  repeating-linear-gradient(90deg, var(--c-accent) 0 2px, transparent 2px 12px) top / 100% 50% no-repeat; }
+.demo-body { padding: 0 var(--s-5) var(--s-7); margin-top: calc(var(--s-5) * -1); }
+.demo-body .bv-tabs { max-width: none; }
+.demo-body .bv-tabs__list { margin-top: var(--s-6); }
+.demo-chip { display: inline-block; padding: 2px var(--s-3); border-radius: 999px; background: var(--c-sand); color: var(--c-ink); font-size: var(--fs-sm); font-weight: 700; border: 1px solid var(--c-border-soft); }
+.demo-price { font-weight: 700; }
+.demo-basket { display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: var(--s-4); margin: var(--s-5) 0 0; padding: var(--s-4) var(--s-5); border-radius: var(--radius-md); background: var(--c-sand); font-weight: 700; }
+
+.demo-header__right { display: flex; flex-wrap: wrap; align-items: center; gap: var(--s-3); }
+.demo-user { color: var(--c-on-deep-muted); font-weight: 700; }
+.demo-h2 { margin: 0 0 var(--s-4); font-size: var(--fs-xl); }
+.demo-h2:focus { outline: none; }
+.demo-qty { display: inline-flex; align-items: center; gap: var(--s-2); }
+.demo-qty__n { min-width: 2ch; text-align: center; font-weight: 700; font-variant-numeric: tabular-nums; }
+.demo-total { display: flex; justify-content: space-between; margin: var(--s-4) 0 0; padding: var(--s-3) var(--s-5); font-size: var(--fs-lg); font-weight: 700; }
+.demo-actions { display: flex; flex-wrap: wrap; justify-content: flex-end; gap: var(--s-3); margin-top: var(--s-3); }
+.demo-empty { padding: var(--s-6); border: 2px dashed var(--c-border-soft); border-radius: var(--radius-md); text-align: center; }
+.demo-empty p { margin-top: 0; font-size: var(--fs-lg); }

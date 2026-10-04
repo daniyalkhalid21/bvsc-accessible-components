@@ -1,0 +1,20 @@
+// Captures README screenshots from the built Storybook into docs/screenshots/. Needs: npm run build-storybook, npx playwright install chromium.
+import { chromium } from 'playwright';
+import { createServer } from 'node:http';
+import { readFileSync, existsSync, statSync, mkdirSync } from 'node:fs';
+import { extname, join, normalize } from 'node:path';
+import { fileURLToPath } from 'node:url';
+const root = fileURLToPath(new URL('..', import.meta.url)); const dir = join(root, 'storybook-static'); const out = join(root, 'docs/screenshots');
+if (!existsSync(dir)) throw new Error('Run npm run build-storybook first'); mkdirSync(out, { recursive: true });
+const types = { '.html': 'text/html', '.js': 'text/javascript', '.css': 'text/css', '.json': 'application/json', '.svg': 'image/svg+xml', '.woff2': 'font/woff2' };
+const srv = createServer((q, s) => { let p = join(dir, normalize(decodeURIComponent(q.url.split('?')[0]))); if (existsSync(p) && statSync(p).isDirectory()) p = join(p, 'index.html'); if (!existsSync(p)) { s.writeHead(404); return s.end(); } s.writeHead(200, { 'content-type': types[extname(p)] ?? 'application/octet-stream' }); s.end(readFileSync(p)); }).listen(6108);
+const browser = await chromium.launch(); const page = await browser.newPage({ viewport: { width: 1280, height: 900 }, deviceScaleFactor: 2 });
+const go = (id) => page.goto(`http://localhost:6108/iframe.html?id=${id}&viewMode=story`, { waitUntil: 'networkidle' });
+const shot = async (name, fn) => { page.setDefaultTimeout(8000); try { await fn(); await page.waitForTimeout(300); await page.screenshot({ path: join(out, `${name}.png`) }); console.log('saved', name); } catch (e) { console.warn('skipped', name, String(e.message).split('\n')[0]); } };
+const demo = 'pages-demo-catalogue-page--catalogue';
+await shot('01-demo-catalogue', () => go(demo));
+await shot('02-account-menu-open', async () => { await go(demo); await page.getByRole('button', { name: 'Account' }).click(); });
+await shot('03-confirm-order-modal', async () => { await go(demo); await page.getByRole('button', { name: /add slicker brush/i }).click(); await page.getByRole('button', { name: /^basket \(/i }).first().click(); await page.getByRole('button', { name: 'Place order' }).click(); });
+await shot('04-form-validation-errors', async () => { await go(demo); await page.getByRole('tab', { name: 'Order enquiry' }).click(); await page.getByRole('button', { name: /send enquiry/i }).click(); });
+await shot('05-focus-ring-keyboard', async () => { await go(demo); await page.keyboard.press('Tab'); await page.keyboard.press('Tab'); });
+await browser.close(); srv.close();

@@ -1,0 +1,34 @@
+import { Meta, Canvas } from '@storybook/blocks';
+import * as Stories from './Accordion.stories';
+
+<Meta of={Stories} />
+
+# Accordion
+
+Expandable sections for FAQs such as delivery and returns. Each header is a button in a heading.
+
+<Canvas of={Stories.Default} />
+
+## When to use
+<ul><li>Long content where users need only some sections.</li></ul>
+## When not to use
+<ul><li>Content every user must read. Show it directly.</li><li>Navigation (use a menu or links).</li></ul>
+## Props
+<table><thead><tr><th scope="col">Prop</th><th scope="col">Type</th><th scope="col">Default</th><th scope="col">Description</th></tr></thead><tbody><tr><td><code>items</code></td><td><code>&#123;id,title,content&#125;[]</code></td><td><code>required</code></td><td>Sections</td></tr><tr><td><code>headingLevel</code></td><td><code>2 &#124; 3 &#124; 4</code></td><td><code>3</code></td><td>Heading level wrapping the buttons</td></tr><tr><td><code>allowMultiple</code></td><td><code>boolean</code></td><td><code>true</code></td><td>When false, opening one closes the others</td></tr><tr><td><code>defaultOpen</code></td><td><code>string[]</code></td><td><code>[]</code></td><td>Ids open on first render</td></tr></tbody></table>
+
+## Usage
+```tsx
+<Accordion headingLevel={2} items={faqItems} allowMultiple={false} />
+```
+
+## APG pattern followed
+[Accordion](https://www.w3.org/WAI/ARIA/apg/patterns/accordion/)
+
+## Keyboard interaction
+<table><thead><tr><th scope="col">Key</th><th scope="col">Action</th></tr></thead><tbody><tr><td>Enter / Space</td><td>Toggles the focused section</td></tr><tr><td>Arrow Down / Up</td><td>Moves focus to the next / previous header, wrapping</td></tr><tr><td>Home / End</td><td>Moves focus to the first / last header</td></tr><tr><td>Tab</td><td>Moves through headers and into open panel content</td></tr></tbody></table>
+
+## Screen reader notes
+Each header is announced as "title, button, collapsed/expanded". Open panels are regions named by their header. Collapsed panels are hidden from the accessibility tree.
+
+## Known limitations
+<ul><li>Panels get role=region only when there are six or fewer, following APG guidance; with more, the panel is a plain div and the button still carries aria-expanded and aria-controls.</li></ul>

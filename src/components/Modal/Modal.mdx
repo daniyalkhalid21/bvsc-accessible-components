@@ -1,0 +1,34 @@
+import { Meta, Canvas } from '@storybook/blocks';
+import * as Stories from './Modal.stories';
+
+<Meta of={Stories} />
+
+# Modal
+
+A dialog that blocks the page to get a decision. Includes a Confirm order variant.
+
+<Canvas of={Stories.ConfirmOrder} />
+
+## When to use
+<ul><li>Decisions that must be made before continuing, such as confirming an order.</li></ul>
+## When not to use
+<ul><li>Non-blocking information (use a Toast).</li><li>Long forms (use a page).</li></ul>
+## Props
+<table><thead><tr><th scope="col">Prop</th><th scope="col">Type</th><th scope="col">Default</th><th scope="col">Description</th></tr></thead><tbody><tr><td><code>open</code></td><td><code>boolean</code></td><td><code>required</code></td><td>Controlled open state</td></tr><tr><td><code>onClose</code></td><td><code>() => void</code></td><td><code>required</code></td><td>Called on Escape, close button or backdrop click</td></tr><tr><td><code>title</code></td><td><code>string</code></td><td><code>required</code></td><td>Dialog name (aria-labelledby)</td></tr><tr><td><code>description</code></td><td><code>ReactNode</code></td><td></td><td>Dialog description (aria-describedby)</td></tr><tr><td><code>footer</code></td><td><code>ReactNode</code></td><td></td><td>Action buttons; mark the safe initial focus with data-autofocus</td></tr></tbody></table>
+
+## Usage
+```tsx
+<ConfirmOrderModal open={open} onClose={close} onConfirm={place} lines={lines} />
+```
+
+## APG pattern followed
+[Dialog (Modal)](https://www.w3.org/WAI/ARIA/apg/patterns/dialog-modal/)
+
+## Keyboard interaction
+<table><thead><tr><th scope="col">Key</th><th scope="col">Action</th></tr></thead><tbody><tr><td>Tab / Shift+Tab</td><td>Cycles inside the dialog</td></tr><tr><td>Escape</td><td>Closes and returns focus to the trigger</td></tr><tr><td>Enter / Space</td><td>Activates the focused button</td></tr></tbody></table>
+
+## Screen reader notes
+Announced as "Confirm your order, dialog" followed by its description. Native dialog with showModal() makes the rest of the page inert. Focus moves to Back to basket (the safe action) and returns to the trigger on close.
+
+## Known limitations
+<ul><li>Focus return and scroll lock are implemented in React; they are verified in jsdom tests with a showModal polyfill, not in a real browser by an automated test.</li><li>Backdrop click closes the dialog; this may be undesirable for destructive confirmations.</li></ul>

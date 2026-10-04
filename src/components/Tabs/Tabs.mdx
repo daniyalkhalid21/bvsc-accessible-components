@@ -1,0 +1,34 @@
+import { Meta, Canvas } from '@storybook/blocks';
+import * as Stories from './Tabs.stories';
+
+<Meta of={Stories} />
+
+# Tabs
+
+Switch between related views of one product: Description, Dosage, Storage.
+
+<Canvas of={Stories.Default} />
+
+## When to use
+<ul><li>Peer sections of content where only one is shown at a time.</li></ul>
+## When not to use
+<ul><li>Steps in a process (use a stepper).</li><li>More than about 6 tabs.</li></ul>
+## Props
+<table><thead><tr><th scope="col">Prop</th><th scope="col">Type</th><th scope="col">Default</th><th scope="col">Description</th></tr></thead><tbody><tr><td><code>tabs</code></td><td><code>&#123;id,label,content&#125;[]</code></td><td><code>required</code></td><td>Tabs and panels</td></tr><tr><td><code>label</code></td><td><code>string</code></td><td><code>required</code></td><td>Accessible name of the tablist</td></tr><tr><td><code>value</code> / <code>onChange</code></td><td><code>string</code> / <code>(id) &#61;&gt; void</code></td><td></td><td>Optional controlled mode, so the page can switch tabs (for example from a menu)</td></tr><tr><td><code>defaultTab</code></td><td><code>string</code></td><td><code>first</code></td><td>Initially selected id</td></tr></tbody></table>
+
+## Usage
+```tsx
+<Tabs label="Product information" tabs={productTabs} />
+```
+
+## APG pattern followed
+[Tabs](https://www.w3.org/WAI/ARIA/apg/patterns/tabs/)
+
+## Keyboard interaction
+<table><thead><tr><th scope="col">Key</th><th scope="col">Action</th></tr></thead><tbody><tr><td>Tab</td><td>Moves into the selected tab, then into the tab panel</td></tr><tr><td>Arrow Right / Left</td><td>Moves to and activates the next / previous tab, wrapping</td></tr><tr><td>Home / End</td><td>Activates the first / last tab</td></tr></tbody></table>
+
+## Screen reader notes
+Announced as "tab, selected, n of m" within a labelled tab list. The panel is labelled by its tab and is focusable (tabindex 0) so keyboard users can reach non-interactive panel content.
+
+## Known limitations
+<ul><li>Automatic activation (focus selects) was chosen because panels are static. For panels that load data, manual activation would be better.</li><li>No vertical orientation support.</li></ul>

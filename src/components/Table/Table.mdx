@@ -1,0 +1,34 @@
+import { Meta, Canvas } from '@storybook/blocks';
+import * as Stories from './Table.stories';
+
+<Meta of={Stories} />
+
+# Table
+
+A data table for the price list: caption, column and row headers, sortable columns, and a keyboard-focusable scroll region.
+
+<Canvas of={Stories.PriceList} />
+
+## When to use
+<ul><li>Comparing structured data across rows and columns.</li></ul>
+## When not to use
+<ul><li>Page layout.</li><li>Very large datasets (no pagination or virtualisation).</li></ul>
+## Props
+<table><thead><tr><th scope="col">Prop</th><th scope="col">Type</th><th scope="col">Default</th><th scope="col">Description</th></tr></thead><tbody><tr><td><code>caption</code></td><td><code>string</code></td><td><code>required</code></td><td>Visible table title; also the default scroll-region label</td></tr><tr><td><code>columns</code></td><td><code>Column[]</code></td><td><code>required</code></td><td>key, header, sortable, numeric, render</td></tr><tr><td><code>rows</code></td><td><code>T[]</code></td><td><code>required</code></td><td>Row data</td></tr><tr><td><code>rowKey</code></td><td><code>(row) => string</code></td><td><code>required</code></td><td>Stable key</td></tr><tr><td><code>scrollLabel</code></td><td><code>string</code></td><td><code>caption</code></td><td>Accessible name of the scroll region</td></tr></tbody></table>
+
+## Usage
+```tsx
+<Table caption="Price list" columns={columns} rows={products} rowKey={r => r.sku} />
+```
+
+## APG pattern followed
+[Table (sortable example)](https://www.w3.org/WAI/ARIA/apg/patterns/table/)
+
+## Keyboard interaction
+<table><thead><tr><th scope="col">Key</th><th scope="col">Action</th></tr></thead><tbody><tr><td>Tab</td><td>Focuses the scroll region, then each sort button and control in the table</td></tr><tr><td>Enter / Space</td><td>Sorts by the focused column; repeat to reverse</td></tr><tr><td>Arrow keys (on the focused region)</td><td>Scroll the table horizontally</td></tr></tbody></table>
+
+## Screen reader notes
+Caption names the table. Sorted column header carries aria-sort; an extra status region announces "Sorted by Price, ascending". The first column is a row header. Stock levels are text ("Out of stock", "(low)").
+
+## Known limitations
+<ul><li>Static sorting only: no filtering, selection or pagination.</li><li>The first column is always the row header.</li></ul>

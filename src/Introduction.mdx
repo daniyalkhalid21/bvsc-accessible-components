@@ -1,0 +1,28 @@
+import { Meta } from '@storybook/blocks';
+
+<Meta title="Introduction" />
+
+# BVSC accessible component library
+
+Eight accessible React components (Button, FormField set, Accordion, Tabs, Table, Modal, Menu, Toast) plus a SkipLink, built for Boutique Veterinary Supply Company. Target: WCAG 2.2 AA. Users include clinic staff, farmers and pet owners, with keyboard-only and screen reader users in mind.
+
+## Scope
+See `docs/SCOPE.md`: client background, users, in and out of scope, assumptions and the success target.
+
+## Accessibility principles
+- Prefer native HTML (button, dialog, fieldset, table). Add ARIA only where HTML has no equivalent.
+- Follow the WAI-ARIA Authoring Practices pattern for each component, and document where we differ.
+- Every control is operable by keyboard, with a visible 3px focus ring and targets of at least 44px.
+- Information is never conveyed by colour alone: errors and stock levels have text and icons.
+- Respect `prefers-reduced-motion`.
+- Contrast is checked at token level (`docs/contrast-report.md`).
+
+## How to run the audits
+<pre>{`npm test               # unit, keyboard and axe tests (vitest)
+npm run contrast       # contrast ratios for every token pair
+npm run build-storybook
+npm run audit          # axe scan of every story -> docs/AUDIT_LOG.md`}</pre>
+
+The audit uses Playwright with a real browser when available, otherwise it falls back to vitest-axe in jsdom (which cannot check colour contrast). The Accessibility tab in each story runs axe live in your browser.
+
+Automated checks find only part of the problems. Screen reader testing (NVDA, VoiceOver) is tracked in `docs/MANUAL_TEST_CHECKLIST.md`.

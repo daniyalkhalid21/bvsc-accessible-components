@@ -1,0 +1,36 @@
+import { Meta, Canvas } from '@storybook/blocks';
+import * as Stories from './Button.stories';
+
+<Meta of={Stories} />
+
+# Button
+
+A native button for actions: add to basket, place order, remove an item. Variants: primary, secondary, danger. Supports a loading state and icon-only use.
+
+<Canvas of={Stories.Primary} />
+
+## When to use
+<ul><li>Triggering an action on the current page (not navigation).</li><li>Icon-only buttons, but always with an accessible name.</li></ul>
+## When not to use
+<ul><li>Navigating to another page. Use a link.</li><li>Do not put the only explanation of a disabled state in the button; say why elsewhere.</li></ul>
+## Props
+<table><thead><tr><th scope="col">Prop</th><th scope="col">Type</th><th scope="col">Default</th><th scope="col">Description</th></tr></thead><tbody><tr><td><code>variant</code></td><td><code>"primary" &#124; "secondary" &#124; "danger"</code></td><td><code>"primary"</code></td><td>Visual and semantic emphasis</td></tr><tr><td><code>loading</code></td><td><code>boolean</code></td><td><code>false</code></td><td>Sets aria-busy, shows a spinner, ignores clicks, stays focusable</td></tr><tr><td><code>loadingText</code></td><td><code>string</code></td><td><code>"Loading"</code></td><td>Visually hidden text announced with the label while loading</td></tr><tr><td><code>iconOnly</code></td><td><code>boolean</code></td><td><code>false</code></td><td>Square target for icon-only buttons; pass aria-label</td></tr><tr><td><code>disabled</code></td><td><code>boolean</code></td><td><code>false</code></td><td>Native disabled: removed from the tab order</td></tr><tr><td><code>...rest</code></td><td><code>ButtonHTMLAttributes</code></td><td></td><td>Passed to the button; type defaults to "button"</td></tr></tbody></table>
+
+## Usage
+```tsx
+<Button variant="danger" onClick={remove}>Remove item</Button>
+<Button loading loadingText="Placing order">Place order</Button>
+<Button iconOnly aria-label="Open basket"><BasketIcon /></Button>
+```
+
+## APG pattern followed
+[Button](https://www.w3.org/WAI/ARIA/apg/patterns/button/)
+
+## Keyboard interaction
+<table><thead><tr><th scope="col">Key</th><th scope="col">Action</th></tr></thead><tbody><tr><td>Enter</td><td>Activates the button</td></tr><tr><td>Space</td><td>Activates the button</td></tr></tbody></table>
+
+## Screen reader notes
+Announced as "name, button". Loading adds ", loading text" to the name and sets aria-busy. Disabled buttons are announced as "dimmed/unavailable" by most readers.
+
+## Known limitations
+<ul><li>Loading keeps the button focusable via aria-disabled-like behaviour (clicks ignored), so screen reader users can still find it.</li><li>Disabled text contrast (4.15:1) is exempt from WCAG 1.4.3 but is low; do not rely on disabled state to convey required information.</li></ul>

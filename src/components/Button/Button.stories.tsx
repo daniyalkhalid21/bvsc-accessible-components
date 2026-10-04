@@ -1,0 +1,11 @@
+import type { Meta, StoryObj } from '@storybook/react';
+import { Button } from './Button';
+const meta: Meta<typeof Button> = { title: 'Components/Button', component: Button, args: { children: 'Add to basket' } };
+export default meta;
+type S = StoryObj<typeof Button>;
+export const Primary: S = {};
+export const Secondary: S = { args: { variant: 'secondary', children: 'View details' } };
+export const Danger: S = { args: { variant: 'danger', children: 'Remove item' } };
+export const Loading: S = { args: { loading: true, loadingText: 'Adding to basket', children: 'Add to basket' } };
+export const Disabled: S = { args: { disabled: true, children: 'Out of stock' } };
+export const IconOnly: S = { args: { iconOnly: true, 'aria-label': 'Open basket', variant: 'secondary', children: <svg aria-hidden="true" focusable="false" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><path d="M3 4h2l2.4 11h10.2L20 7H6.2"/><circle cx="9" cy="20" r="1.5"/><circle cx="17" cy="20" r="1.5"/></svg> } };

@@ -1,0 +1,5 @@
+run = "npm run serve-storybook"
+[deployment]
+build = ["sh", "-c", "npm install --legacy-peer-deps && npm run build-storybook"]
+publicDir = "storybook-static"
+deploymentTarget = "static"

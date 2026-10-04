@@ -1,0 +1,7 @@
+.bv-tabs { max-width: 44rem; }
+.bv-tabs__list { display: flex; flex-wrap: wrap; gap: var(--s-2); padding: var(--s-1) var(--s-2) 0; }
+.bv-tabs__tab { min-height: var(--target-min); padding: var(--s-2) var(--s-4); background: transparent; border: 0; border-bottom: 4px solid transparent; border-radius: var(--radius-sm) var(--radius-sm) 0 0; font: inherit; font-weight: 700; color: var(--c-ink-muted); cursor: pointer; }
+.bv-tabs__tab:hover { background: var(--c-sand); color: var(--c-ink); }
+.bv-tabs__tab[aria-selected="true"] { color: var(--c-primary); border-bottom-color: var(--c-primary); background: transparent; }
+.bv-tabs__panel { padding: var(--s-5); background: var(--c-surface); border-radius: var(--radius-lg); box-shadow: var(--shadow-card); }
+.bv-tabs__panel[hidden] { display: none; }

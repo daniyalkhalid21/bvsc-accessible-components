@@ -1,0 +1,24 @@
+# Changelog
+## 2026-10-03
+- Scaffolded Vite + React 18 + TS, Storybook 8, Vitest, vitest-axe. `npm i` needed `--legacy-peer-deps` (peer conflict in the first attempt).
+- Added tokens.css and scripts/contrast-check.mjs: 27 pairs, 0 failing.
+- Button test: first version wrongly tabbed after click (test bug, not component bug); fixed by asserting focus after click, then blur + tab.
+- FormField: axe aria-allowed-attr (serious) on RadioGroup <fieldset> for aria-required/aria-invalid (5 failing tests incl. story axe checks). Fixed by removing both attributes; error stays in aria-describedby, required stays in legend text.
+- FormField: accessible description read 'Error:Bad email' (space trimmed inside hidden span). Fixed by moving the space outside the span.
+- Menu/Toast tests: first run 5 failures, all test-harness issues (type-ahead buffer legitimately accumulated 'cr' within 700ms; user-event hung under fake timers). Fixed tests, components unchanged.
+- All 8 components + SkipLink + demo page built. Vitest: 97 passing. tsc clean (test files excluded from tsc because composeStories typing is loose).
+- Phase 4: Chromium download blocked (Playwright). audit-stories.mjs auto-falls back to vitest-axe over all stories. Result: 30 stories, 0 violations after; 1 real finding fixed earlier (aria-allowed-attr, critical, FormField fieldset).
+- Phase 5: MDX docs for 9 components + Introduction (autodocs tag removed to avoid duplicate docs pages). build-storybook succeeds. Added .replit (static deployment of storybook-static).
+- Found: Storybook indexed 7 non-story exports (faqItems, productTabs, products, columns, lines, accountItems, OrderEnquiryForm) as broken stories (37 entries vs 30 real). Fixed with excludeStories on each meta.
+- Phase 6 docs written: README, SUMMARY, MANUAL_TEST_CHECKLIST (blank result columns), VIDEO_SCRIPT.
+- Phase 7: final run: 127 tests pass, 0 serious/critical axe, 27 contrast pairs 0 failing, tsc ok, vite build ok, storybook build ok.
+- Visual redesign: deep pine header/hero, sage-white page, amber syringe-scale strip, pill buttons, underline tabs, card-style panels, category chips, Fraunces + Atkinson Hyperlegible fonts. Contrast now 31 pairs, 0 failing. 127 tests still pass. Not visually checked in a browser (none available in sandbox).
+- Portfolio pass: Accordion drops role=region above 6 panels (APG); tests now type-checked (added vitest-axe typings, @types/node), 128 tests; CI workflow (typecheck, tests, contrast, storybook build, real Chromium axe audit with REQUIRE_BROWSER); GitHub Pages deploy workflow; screenshots script; docs/WCAG_CONFORMANCE.md; package.json metadata; prod npm audit: 0 vulnerabilities.
+- Demo rewrite after user feedback: basket was only a counter, 'My orders' was a stub, Sign out/Invoices did nothing. Now a working simulated flow (basket tab with qty/remove/clear/stock limits, place order, orders history, invoice modal, sign in/out). Tabs gained an optional controlled mode (value/onChange). 135 tests pass.
+- User's Windows machine: 1 demo test timed out at the 5s default (took 5.6s, multi-step flow). Raised testTimeout to 30s; silenced jsdom canvas warning in test-setup. No component change.
+- Windows bugs found by user running `npm run audit`: scripts used URL.pathname (leading slash on drive letters) and spawned `npx` without a shell. Fixed with fileURLToPath and shell:true in audit-stories.mjs and screenshots.mjs. Note: audit needs build-storybook first.
+- User's first real Playwright run: @axe-core/playwright rejected browser.newPage() ('Please use browser.newContext()'). Fixed by creating the page from a context in audit-stories.mjs.
+- screenshots.mjs: modal shot used the removed 'Review order' button; now goes Basket -> Place order. Added an 8s default timeout so a bad selector fails fast.
+- First real-browser audit (Playwright/Chromium, 30 stories): 0 serious/critical, 66 moderate. All three rules are page-level (landmark-one-main, page-has-heading-one, region) and not applicable to isolated component stories: scoped off for Components/*, kept on for the Demo page (1 'region' finding there is still open until the offending element is identified; the audit log now records the element for each finding).
+- Real-browser audit after scoping: 0 serious/critical, 1 moderate (region) on the Demo page, element = the skip link outside any landmark. Fix: SkipLink moved inside <header>. To be confirmed by re-running npm run audit.
+- Skip link moved into header; re-run of real-browser audit: 30 stories, 0 serious/critical, 0 of any impact. README, SUMMARY and WCAG_CONFORMANCE updated to match.

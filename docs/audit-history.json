@@ -1,0 +1,25 @@
+[
+ {
+  "date": "2026-10-03",
+  "component": "FormField",
+  "story": "RadioGroupError, OrderEnquiry (also the standalone order form test render in its error state)",
+  "rule": "aria-allowed-attr",
+  "impact": "critical",
+  "description": "aria-required / aria-invalid are not allowed on <fieldset> (RadioGroup)",
+  "status": "fixed",
+  "fix": "Removed both attributes from the fieldset; the error is still exposed through aria-describedby and 'required' is stated in the legend text",
+  "before_failing_stories": 2,
+  "source": "Recorded from the first full FormField vitest-axe run during development: 4 failing axe tests = 2 stories + 2 test-only renders of the order form (initial and error state). Impact level re-confirmed with a probe run."
+ },
+ {
+  "date": "2026-10-04",
+  "component": "All component stories",
+  "story": "27 component stories (first real-browser scan)",
+  "rule": "landmark-one-main, page-has-heading-one, region",
+  "impact": "moderate",
+  "description": "Page-level rules reported on isolated components, which are not pages",
+  "status": "scoped out",
+  "fix": "Rules disabled for Components/* stories in the audit script and Storybook a11y addon; still enforced on the Demo page",
+  "element": "-"
+ }
+]

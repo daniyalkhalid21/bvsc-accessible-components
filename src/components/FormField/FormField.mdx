@@ -1,0 +1,35 @@
+import { Meta, Canvas } from '@storybook/blocks';
+import * as Stories from './FormField.stories';
+
+<Meta of={Stories} />
+
+# FormField
+
+Labelled form controls: TextInput, Select, Checkbox, RadioGroup and Textarea. Hints and errors are wired with aria-describedby, invalid fields get aria-invalid, and errors are text with an icon (never colour only).
+
+<Canvas of={Stories.OrderEnquiry} />
+
+## When to use
+<ul><li>Any form that collects information from customers.</li><li>The Order enquiry story shows an error summary that takes focus and links to each invalid field.</li></ul>
+## When not to use
+<ul><li>Placeholders as labels. Every control has a visible label.</li><li>Grouping unrelated controls in a fieldset.</li></ul>
+## Props
+<table><thead><tr><th scope="col">Prop</th><th scope="col">Type</th><th scope="col">Default</th><th scope="col">Description</th></tr></thead><tbody><tr><td><code>label / legend</code></td><td><code>string</code></td><td><code>required</code></td><td>Visible label (RadioGroup uses legend)</td></tr><tr><td><code>hint</code></td><td><code>string</code></td><td></td><td>Helper text linked by aria-describedby</td></tr><tr><td><code>error</code></td><td><code>string</code></td><td></td><td>Error text; sets aria-invalid and is announced as "Error: ..."</td></tr><tr><td><code>required</code></td><td><code>boolean</code></td><td><code>false</code></td><td>Native required plus "(required)" in the label text</td></tr><tr><td><code>options</code></td><td><code>&#123;value,label&#125;[]</code></td><td></td><td>Select and RadioGroup options</td></tr></tbody></table>
+
+## Usage
+```tsx
+<TextInput label="Email" type="email" required hint="We send the receipt here" error={errors.email} />
+<RadioGroup legend="Delivery speed" name="delivery" options={opts} value={v} onChange={setV} />
+```
+
+## APG pattern followed
+[Radio Group (and native HTML for the rest)](https://www.w3.org/WAI/ARIA/apg/patterns/radio/)
+
+## Keyboard interaction
+<table><thead><tr><th scope="col">Key</th><th scope="col">Action</th></tr></thead><tbody><tr><td>Tab</td><td>Moves between controls (one stop for a radio group)</td></tr><tr><td>Arrow keys</td><td>Moves and selects within a radio group (native)</td></tr><tr><td>Space</td><td>Toggles a checkbox / selects a focused radio</td></tr><tr><td>Arrow keys / type</td><td>Changes the option in a select (native)</td></tr></tbody></table>
+
+## Screen reader notes
+Label, required state, hint and error are read when the control gets focus. The error text begins with the hidden word "Error:". The radio group is announced as a group with the legend as its name.
+
+## Known limitations
+<ul><li>aria-invalid and aria-required are not allowed on fieldset (found by axe, fixed), so a group error is exposed through aria-describedby only.</li><li>Validation is demonstration code in the story, not a validation library.</li></ul>

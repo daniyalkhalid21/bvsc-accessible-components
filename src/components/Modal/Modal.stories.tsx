@@ -1,0 +1,12 @@
+import React, { useState } from 'react';
+import type { Meta, StoryObj } from '@storybook/react';
+import { Modal } from './Modal';
+import { ConfirmOrderModal } from './ConfirmOrderModal';
+import { Button } from '../Button/Button';
+export const lines = [{ name: 'Luer-lock syringe 5 ml (box of 100)', qty: 2, price: 18.5 }, { name: 'Electrolyte feed supplement 5 kg', qty: 1, price: 32 }];
+const meta: Meta = { title: 'Components/Modal', excludeStories: /^(lines)$/, };
+export default meta;
+type S = StoryObj;
+export const Default: S = { render: () => { const [o, setO] = useState(false); return (<><Button onClick={() => setO(true)}>Delivery details</Button><Modal open={o} onClose={() => setO(false)} title="Delivery details" description="Orders placed before 2 pm ship the same day."><p>Cold-chain items ship next day only.</p><div className="bv-modal__footer"><Button onClick={() => setO(false)}>Got it</Button></div></Modal></>); } };
+export const ConfirmOrder: S = { render: () => { const [o, setO] = useState(false); const [busy, setBusy] = useState(false); return (<><Button onClick={() => setO(true)}>Review order</Button><ConfirmOrderModal open={o} onClose={() => setO(false)} lines={lines} loading={busy} onConfirm={() => { setBusy(true); setTimeout(() => { setBusy(false); setO(false); }, 1200); }} /></>); } };
+export const ConfirmOrderOpen: S = { render: () => <ConfirmOrderModal open onClose={() => {}} onConfirm={() => {}} lines={lines} /> };

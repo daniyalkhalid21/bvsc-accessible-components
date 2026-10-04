@@ -1,0 +1,34 @@
+import { Meta, Canvas } from '@storybook/blocks';
+import * as Stories from './Menu.stories';
+
+<Meta of={Stories} />
+
+# Menu
+
+A menu button that opens a list of actions, for the account menu.
+
+<Canvas of={Stories.Default} />
+
+## When to use
+<ul><li>A short list of actions or commands.</li></ul>
+## When not to use
+<ul><li>Site navigation (use a nav with links).</li><li>Choosing a value (use a select).</li></ul>
+## Props
+<table><thead><tr><th scope="col">Prop</th><th scope="col">Type</th><th scope="col">Default</th><th scope="col">Description</th></tr></thead><tbody><tr><td><code>label</code></td><td><code>string</code></td><td><code>required</code></td><td>Button text and menu name</td></tr><tr><td><code>items</code></td><td><code>&#123;id,label,onSelect?,disabled?&#125;[]</code></td><td><code>required</code></td><td>Menu items</td></tr></tbody></table>
+
+## Usage
+```tsx
+<Menu label="Account" items={[{ id: "orders", label: "My orders", onSelect: openOrders }]} />
+```
+
+## APG pattern followed
+[Menu Button](https://www.w3.org/WAI/ARIA/apg/patterns/menu-button/)
+
+## Keyboard interaction
+<table><thead><tr><th scope="col">Key</th><th scope="col">Action</th></tr></thead><tbody><tr><td>Enter / Space / Arrow Down</td><td>Opens the menu, focus on the first item</td></tr><tr><td>Arrow Up (on button)</td><td>Opens the menu, focus on the last item</td></tr><tr><td>Arrow Down / Up</td><td>Next / previous item, wrapping; disabled items are skipped</td></tr><tr><td>Home / End</td><td>First / last item</td></tr><tr><td>Letter keys</td><td>Type-ahead: jumps to the next item starting with the typed text</td></tr><tr><td>Enter / Space</td><td>Activates the item, closes the menu, focus returns to the button</td></tr><tr><td>Escape</td><td>Closes the menu and returns focus to the button</td></tr><tr><td>Tab</td><td>Closes the menu</td></tr></tbody></table>
+
+## Screen reader notes
+Button is announced as "Account, menu button, collapsed/expanded". Items are announced as "menu item n of m". Disabled items are exposed with aria-disabled.
+
+## Known limitations
+<ul><li>No submenus, checkbox or radio menu items.</li><li>Menu opens below the button without collision detection.</li></ul>

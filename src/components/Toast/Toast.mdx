@@ -1,0 +1,36 @@
+import { Meta, Canvas } from '@storybook/blocks';
+import * as Stories from './Toast.stories';
+
+<Meta of={Stories} />
+
+# Toast
+
+Short messages such as "Added to basket". Never moves focus.
+
+<Canvas of={Stories.Triggers} />
+
+## When to use
+<ul><li>Confirmation of a user action; recoverable errors.</li></ul>
+## When not to use
+<ul><li>Messages the user must act on right now (use a modal).</li><li>Long content.</li></ul>
+## Props
+<table><thead><tr><th scope="col">Prop</th><th scope="col">Type</th><th scope="col">Default</th><th scope="col">Description</th></tr></thead><tbody><tr><td><code>ToastProvider</code></td><td><code>component</code></td><td><code>required</code></td><td>Mount once; renders two persistent live regions</td></tr><tr><td><code>useToast().show</code></td><td><code>(kind, message, duration?) => id</code></td><td></td><td>kind is info, success or error</td></tr><tr><td><code>useToast().dismiss</code></td><td><code>(id) => void</code></td><td></td><td>Remove a toast</td></tr></tbody></table>
+
+## Usage
+```tsx
+const { show } = useToast();
+show("success", "Added to basket: Syringe 5 ml");
+show("error", "We could not place your order.");
+```
+
+## APG pattern followed
+[Alert (no dedicated APG toast pattern)](https://www.w3.org/WAI/ARIA/apg/patterns/alert/)
+
+## Keyboard interaction
+<table><thead><tr><th scope="col">Key</th><th scope="col">Action</th></tr></thead><tbody><tr><td>Tab</td><td>Reaches the dismiss button</td></tr><tr><td>Enter / Space</td><td>Dismisses the toast</td></tr><tr><td>Escape</td><td>Dismisses when focus is inside the toast</td></tr></tbody></table>
+
+## Screen reader notes
+Info and success toasts are added to a persistent role=status region (polite). Errors go to a persistent role=alert region (assertive). Each message starts with a hidden "Success:" / "Error:" prefix.
+
+## Known limitations
+<ul><li>Escape only works while focus is inside a toast; there is no global hotkey.</li><li>Auto-dismiss is 6 seconds by default; users who need more time can hover or focus to pause, but WCAG 2.2.1 timing is best met by also offering persistent messages.</li></ul>

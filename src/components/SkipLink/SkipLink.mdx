@@ -1,0 +1,35 @@
+import { Meta, Canvas } from '@storybook/blocks';
+import * as Stories from './SkipLink.stories';
+
+<Meta of={Stories} />
+
+# SkipLink
+
+A link that is visible on focus and jumps past repeated navigation to main content.
+
+<Canvas of={Stories.Default} />
+
+## When to use
+<ul><li>The first focusable element on every page.</li></ul>
+## When not to use
+<ul><li>As a replacement for landmarks.</li></ul>
+## Props
+<table><thead><tr><th scope="col">Prop</th><th scope="col">Type</th><th scope="col">Default</th><th scope="col">Description</th></tr></thead><tbody><tr><td><code>targetId</code></td><td><code>string</code></td><td><code>"main"</code></td><td>Id of the main content element (give it tabIndex -1)</td></tr><tr><td><code>children</code></td><td><code>ReactNode</code></td><td><code>"Skip to main content"</code></td><td>Link text</td></tr></tbody></table>
+
+## Usage
+```tsx
+<SkipLink targetId="main" />
+<main id="main" tabIndex={-1}>...</main>
+```
+
+## APG pattern followed
+[Skip link technique (WCAG G1)](https://www.w3.org/WAI/WCAG22/Techniques/general/G1)
+
+## Keyboard interaction
+<table><thead><tr><th scope="col">Key</th><th scope="col">Action</th></tr></thead><tbody><tr><td>Tab</td><td>First tab stop; reveals the link</td></tr><tr><td>Enter</td><td>Moves focus to main content</td></tr></tbody></table>
+
+## Screen reader notes
+Announced as a link. Activating it moves focus to the main element.
+
+## Known limitations
+<ul><li>Only one skip target is supported.</li></ul>

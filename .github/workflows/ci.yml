@@ -1,0 +1,23 @@
+name: CI
+on:
+  push:
+  pull_request:
+jobs:
+  verify:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with: { node-version: 22, cache: npm }
+      - run: npm ci --legacy-peer-deps
+      - run: npm run typecheck
+      - run: npm test
+      - run: npm run contrast
+      - run: npm run build-storybook
+      - run: npx playwright install --with-deps chromium
+      # Real Chromium + axe scan of every story. Fails the build on serious/critical violations.
+      - run: npm run audit
+        env: { REQUIRE_BROWSER: "1" }
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with: { name: audit-log, path: docs/AUDIT_LOG.md }

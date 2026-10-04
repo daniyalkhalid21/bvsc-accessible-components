@@ -1,0 +1,7 @@
+{
+ "date": "2026-10-04",
+ "mode": "Playwright + @axe-core/playwright",
+ "serious_critical": 0,
+ "any": 66,
+ "note": "all moderate: landmark-one-main and page-has-heading-one on 27 component stories each, region on 11 component stories plus the demo page; page-level rules are not applicable to isolated components"
+}
