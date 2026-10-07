@@ -36,7 +36,7 @@ export function Menu({ label, items }: { label: string; items: MenuItem[] }) {
   return (
     <div className="bv-menu" ref={wrap}>
       <button ref={btn} type="button" className="bv-menu__btn" aria-haspopup="menu" aria-expanded={open} aria-controls={open ? `${base}-menu` : undefined}
-        onClick={() => { setOpen(o => !o); }} onKeyDown={onButtonKey}>
+        onClick={() => { if (!open) setPending('first'); setOpen(o => !o); }} onKeyDown={onButtonKey}>
         {label}<svg aria-hidden="true" focusable="false" width="14" height="14" viewBox="0 0 16 16"><path d="M3 6l5 5 5-5" fill="none" stroke="currentColor" strokeWidth="2"/></svg>
       </button>
       {open && (

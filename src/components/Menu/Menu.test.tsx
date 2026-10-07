@@ -18,6 +18,10 @@ describe('Menu', () => {
     btn().focus(); await userEvent.keyboard('{ArrowDown}'); expect(item(/alpha/i)).toHaveFocus();
     await userEvent.keyboard('{Enter}'); expect(fn).toHaveBeenCalled(); expect(screen.queryByRole('menu')).not.toBeInTheDocument(); expect(btn()).toHaveFocus();
   });
+  it('Enter and Space on the button open the menu with the first item focused', async () => {
+    render(<Menu label="Account" items={accountItems} />); btn().focus(); await userEvent.keyboard('{Enter}'); expect(item(/my orders/i)).toHaveFocus();
+    await userEvent.keyboard('{Escape}'); expect(btn()).toHaveFocus(); await userEvent.keyboard(' '); expect(item(/my orders/i)).toHaveFocus();
+  });
   it('ArrowUp on the button opens with last item focused', async () => { render(<Menu label="Account" items={accountItems} />); btn().focus(); await userEvent.keyboard('{ArrowUp}'); expect(item(/sign out/i)).toHaveFocus(); });
   it('arrows wrap, Home/End jump, disabled items are skipped', async () => {
     render(<Menu label="Account" items={accountItems} />); btn().focus(); await userEvent.keyboard('{ArrowDown}');
